@@ -4,8 +4,12 @@
 
     app.directive('angularFilemanager', ['$parse', 'fileManagerConfig', function($parse, fileManagerConfig) {
         return {
-            restrict: 'EA',
-            templateUrl: fileManagerConfig.tplPath + '/main.html'
+          restrict: 'EA',
+          scope: {
+            imageonly: '='
+          },
+          controllerAs: 'vm',
+          templateUrl: fileManagerConfig.tplPath + '/main.html'
         };
     }]);
 
@@ -36,5 +40,5 @@
             });
         };
     }]);
-    
+
 })(angular);

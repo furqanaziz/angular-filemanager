@@ -1,8 +1,8 @@
 (function(angular, $) {
     'use strict';
     angular.module('FileManagerApp').controller('FileManagerCtrl', [
-        '$scope', '$rootScope', '$window', '$translate', 'fileManagerConfig', 'item', 'fileNavigator', 'apiMiddleware',
-        function($scope, $rootScope, $window, $translate, fileManagerConfig, Item, FileNavigator, ApiMiddleware) {
+        '$scope', '$rootScope', '$window', '$translate', 'fileManagerConfig', 'item', 'fileNavigator', 'apiMiddleware', 'toastr',
+        function($scope, $rootScope, $window, $translate, fileManagerConfig, Item, FileNavigator, ApiMiddleware, toastr) {
 
         var $storage = $window.localStorage;
         $scope.config = fileManagerConfig;
@@ -125,14 +125,18 @@
             }
 
             if (typeof $scope.config.pickCallback === 'function' && pick) {
+              if ($scope.imageonly && !item.isImage()) {
+                toastr.error('Please pick an image');
+              } else {
                 var callbackSuccess = $scope.config.pickCallback(item.model);
                 if (callbackSuccess === true) {
-                    return;
+                  return;
                 }
+              }
             }
 
             if (item.isImage()) {
-                if ($scope.config.previewImagesInModal) {
+              if ($scope.config.previewImagesInModal) {
                     return $scope.openImagePreview(item);
                 }
                 return $scope.apiMiddleware.download(item, true);

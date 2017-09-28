@@ -3,8 +3,9 @@
     angular.module('FileManagerApp').service('fileNavigator', [
         'apiMiddleware', 'fileManagerConfig', 'item', function (ApiMiddleware, fileManagerConfig, Item) {
 
-        var FileNavigator = function() {
-            this.apiMiddleware = new ApiMiddleware();
+        var FileNavigator = function(config) {
+            this.config = (typeof config === 'undefined') ? fileManagerConfig : config;
+            this.apiMiddleware = new ApiMiddleware(this.config);
             this.requesting = false;
             this.fileList = [];
             this.currentPath = this.getBasePath();

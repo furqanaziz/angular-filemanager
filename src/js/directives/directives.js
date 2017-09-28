@@ -6,13 +6,19 @@
         return {
           restrict: 'EA',
           scope: {
-            imageonly: '='
+            imageonly: '=',
+            config: '=?'
           },
+          link: function (scope) {
+                            scope.config = scope.config || {};
+                           scope.templateUrl = ('tplPath' in scope.config) ? scope.config.tplPath : fileManagerConfig.tplPath;
+                        },
           controllerAs: 'vm',
-          templateUrl: fileManagerConfig.tplPath + '/main.html'
+          template: '<div ng-include="templateUrl + \'/main.html\'"></div>'
+          
         };
     }]);
-
+//templateUrl: fileManagerConfig.tplPath + '/main.html'
     app.directive('ngFile', ['$parse', function($parse) {
         return {
             restrict: 'A',

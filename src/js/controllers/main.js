@@ -5,7 +5,8 @@
         function($scope, $rootScope, $window, $translate, fileManagerConfig, Item, FileNavigator, ApiMiddleware, toastr) {
 
         var $storage = $window.localStorage;
-        $scope.config = fileManagerConfig;
+        //$scope.config = fileManagerConfig;
+        $scope.config = angular.merge(fileManagerConfig, $scope.$parent.$parent.config);
         $scope.reverse = false;
         $scope.predicate = ['model.type', 'model.name'];
         $scope.order = function(predicate) {
@@ -13,8 +14,10 @@
             $scope.predicate[1] = predicate;
         };
         $scope.query = '';
-        $scope.fileNavigator = new FileNavigator();
-        $scope.apiMiddleware = new ApiMiddleware();
+        //$scope.fileNavigator = new FileNavigator();
+        //$scope.apiMiddleware = new ApiMiddleware();
+        $scope.fileNavigator = new FileNavigator($scope.config);
+        $scope.apiMiddleware = new ApiMiddleware($scope.config);
         $scope.uploadFileList = [];
         $scope.viewTemplate = $storage.getItem('viewTemplate') || 'main-icons.html';
         $scope.fileList = [];
@@ -24,7 +27,8 @@
             if ($scope.singleSelection()) {
                 $scope.temp = $scope.singleSelection();
             } else {
-                $scope.temp = new Item({rights: 644});
+                //$scope.temp = new Item({rights: 644});
+                $scope.temp = new Item({rights: 644}, null, $scope.config);
                 $scope.temp.multiple = true;
             }
             $scope.temp.revert();
@@ -46,7 +50,8 @@
                 $storage.setItem('language', locale);
                 return $translate.use(locale);
             }
-            $translate.use($storage.getItem('language') || fileManagerConfig.defaultLang);
+            //$translate.use($storage.getItem('language') || fileManagerConfig.defaultLang);
+            $translate.use($storage.getItem('language') || $scope.config.defaultLang);
         };
 
         $scope.isSelected = function(item) {
@@ -113,7 +118,8 @@
         };
 
         $scope.prepareNewFolder = function() {
-            var item = new Item(null, $scope.fileNavigator.currentPath);
+            //var item = new Item(null, $scope.fileNavigator.currentPath);
+            var item = new Item(null, $scope.fileNavigator.currentPath, $scope.config);
             $scope.temps = [item];
             return item;
         };

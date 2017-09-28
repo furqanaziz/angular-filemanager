@@ -116,6 +116,29 @@ You can do many things by extending the configuration. Like hide the sidebar or 
 
 ---------
 
+
+### Setting individual configuration for multiple managers
+
+```html
+<angular-filemanager config="managerOptions"></angular-filemanager>
+```
+
+```js
+$scope.managerOptions = {
+    appName: "",
+    uploadUrl: 'bridges/php/upload.php',
+    searchForm: false,
+    defaultLang: 'pl',
+    allowedActions: {
+        createFolder: false
+    }
+};
+```
+Settings in config attribute overwrites `fileManagerConfig` provider's values.
+
+---------
+
+
 ### Contribute
 To contribute to the project you can simply fork this repo. To build a minified version, you can simply run the Gulp
 task `gulp build`. The minified/uglified files are created in the `dist` folder.

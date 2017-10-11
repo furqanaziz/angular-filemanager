@@ -1,6 +1,6 @@
 (function(window, angular, $) {
     'use strict';
-    angular.module('FileManagerApp', ['pascalprecht.translate', 'ngFileUpload']);
+    angular.module('FileManagerApp', ['pascalprecht.translate', 'ngFileUpload', 'toastr']);
 
     /**
      * jQuery inits

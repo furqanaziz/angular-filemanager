@@ -16,6 +16,7 @@
     <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <link rel="stylesheet" href="bower_components/bootswatch/paper/bootstrap.min.css" />
   <!-- /third party -->
 
@@ -48,6 +49,15 @@
       var defaults = config.$get();
       config.set({
         appName: 'angular-filemanager',
+        copyUrl: '/copy', // where {/files} is the mount path of this module.
+        createFolderUrl: '/createFolder',
+        downloadFileUrl: '{/files}/download',
+        editUrl: '/edit',
+        removeUrl: '/remove',
+        renameUrl: '/rename',
+        uploadUrl: '/upload',
+        getContentUrl: '/getContent',
+        listUrl: '/list',
         pickCallback: function(item) {
           var msg = 'Picked %s "%s" for external use'
             .replace('%s', item.type)

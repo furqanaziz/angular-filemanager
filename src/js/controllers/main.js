@@ -11,6 +11,8 @@
         $scope.listpath = $scope.$parent.$parent.listpath;
         $scope.imageonly = $scope.$parent.$parent.imageonly;
         $scope.config = angular.merge(fileManagerConfig, $scope.$parent.$parent.config);
+        console.log($scope.$parent.$parent.config);
+        console.log($scope.config);
         $scope.reverse = false;
         $scope.predicate = ['model.type', 'model.name'];
         $scope.order = function(predicate) {

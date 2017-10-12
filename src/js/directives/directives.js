@@ -10,7 +10,12 @@
               scope.isOriginal = attrs.isoriginal;
               scope.imageonly = attrs.imageonly;
               scope.listpath = attrs.path;
-              scope.config = attrs.config || {},
+              scope.config = scope.config || {},
+              console.log(attrs.config);
+              console.log(JSON.parse(attrs.config));
+              if(attrs && attrs.config)
+                scope.config = JSON.parse(attrs.config) || {};
+              console.log(scope.config);
               scope.templateUrl = ('tplPath' in scope.config) ? scope.config.tplPath : fileManagerConfig.tplPath;
           },
           controllerAs: 'vm',

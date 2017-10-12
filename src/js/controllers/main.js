@@ -6,6 +6,10 @@
 
         var $storage = $window.localStorage;
         //$scope.config = fileManagerConfig;
+        console.log($scope.$parent.$parent);
+        $scope.isOriginal = $scope.$parent.$parent.isOriginal;
+        $scope.listpath = $scope.$parent.$parent.listpath;
+        $scope.imageonly = $scope.$parent.$parent.imageonly;
         $scope.config = angular.merge(fileManagerConfig, $scope.$parent.$parent.config);
         $scope.reverse = false;
         $scope.predicate = ['model.type', 'model.name'];
@@ -369,7 +373,7 @@
 
         $scope.changeLanguage(getQueryParam('lang'));
         $scope.isWindows = getQueryParam('server') === 'Windows';
-        $scope.fileNavigator.refresh();
+        $scope.fileNavigator.refresh({path: $scope.listpath, isOriginal: $scope.isOriginal});
 
     }]);
 })(angular, jQuery);

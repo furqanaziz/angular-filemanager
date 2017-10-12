@@ -5,16 +5,14 @@
     app.directive('angularFilemanager', ['$parse', 'fileManagerConfig', function($parse, fileManagerConfig) {
         return {
           restrict: 'EA',
-          scope: {
-            imageonly: '=',
-            config: '=?',
-            path: '=?',
-            isoriginal: '=?',
+          scope: true,
+          link: function (scope, element, attrs) {
+              scope.isOriginal = attrs.isoriginal;
+              scope.imageonly = attrs.imageonly;
+              scope.listpath = attrs.path;
+              scope.config = attrs.config || {},
+              scope.templateUrl = ('tplPath' in scope.config) ? scope.config.tplPath : fileManagerConfig.tplPath;
           },
-          link: function (scope) {
-                            scope.config = scope.config || {};
-                           scope.templateUrl = ('tplPath' in scope.config) ? scope.config.tplPath : fileManagerConfig.tplPath;
-                        },
           controllerAs: 'vm',
           template: '<div ng-include="templateUrl + \'/main.html\'"></div>'
           

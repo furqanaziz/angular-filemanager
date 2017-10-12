@@ -49,16 +49,11 @@
             return this.apiMiddleware.list(this.currentPath, this.deferredHandler.bind(this), params);
         };
 
-        FileNavigator.prototype._list = function(isOriginal) {
-            return this.apiMiddleware._list(this.currentPath, isOriginal, this.deferredHandler.bind(this));
-        };
-
         FileNavigator.prototype.refresh = function(params) {
             var self = this;
             if (! self.currentPath.length) {
                 self.currentPath = this.getBasePath();
             }
-            console.log('asdasdasdasd');
             var path = self.currentPath.join('/');
             self.requesting = true;
             self.fileList = [];

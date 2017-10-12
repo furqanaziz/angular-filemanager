@@ -23,9 +23,9 @@
             return item && item.model.fullPath();
         };
 
-        ApiMiddleware.prototype.list = function(path, customDeferredHandler) {
+        ApiMiddleware.prototype.list = function(path, customDeferredHandler, params) {
             //return this.apiHandler.list(fileManagerConfig.listUrl, this.getPath(path), customDeferredHandler);
-            return this.apiHandler.list(this.config.listUrl, this.getPath(path), customDeferredHandler);
+            return this.apiHandler.list(this.config.listUrl, this.getPath(path), customDeferredHandler, params);
         };
 
         ApiMiddleware.prototype.copy = function(files, path) {

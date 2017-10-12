@@ -65,7 +65,7 @@ gulp.task('lint', function () {
           'angular': true,
           'jQuery': true
       },
-      'extends': 'eslint:recommended'
+      //'extends': 'eslint:recommended'
     }))
     .pipe(eslint.format())
     .pipe(eslint.failOnError());

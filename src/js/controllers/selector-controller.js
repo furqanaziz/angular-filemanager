@@ -1,13 +1,14 @@
 (function(angular) {
     'use strict';
     angular.module('FileManagerApp').controller('ModalFileManagerCtrl', 
-        ['$scope', '$rootScope', 'fileNavigator', function($scope, $rootScope, FileNavigator) {
+        ['$scope', '$rootScope', 'fileNavigator', 'fileManagerConfig', function($scope, $rootScope, FileNavigator, fileManagerConfig) {
 
+        $scope.config = angular.merge(fileManagerConfig, $scope.$parent.$parent.config);
         $scope.reverse = false;
         $scope.predicate = ['model.type', 'model.name'];
-        $scope.fileNavigator = new FileNavigator();
+        $scope.fileNavigator = new FileNavigator($scope.config);
         $rootScope.selectedModalPath = [];
-
+        
         $scope.order = function(predicate) {
             $scope.reverse = ($scope.predicate[1] === predicate) ? !$scope.reverse : false;
             $scope.predicate[1] = predicate;

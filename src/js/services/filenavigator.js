@@ -45,19 +45,24 @@
             return deferred.resolve(data);
         };
 
-        FileNavigator.prototype.list = function() {
-            return this.apiMiddleware.list(this.currentPath, this.deferredHandler.bind(this));
+        FileNavigator.prototype.list = function(params) {
+            return this.apiMiddleware.list(this.currentPath, this.deferredHandler.bind(this), params);
         };
 
-        FileNavigator.prototype.refresh = function() {
+        FileNavigator.prototype._list = function(isOriginal) {
+            return this.apiMiddleware._list(this.currentPath, isOriginal, this.deferredHandler.bind(this));
+        };
+
+        FileNavigator.prototype.refresh = function(params) {
             var self = this;
             if (! self.currentPath.length) {
                 self.currentPath = this.getBasePath();
             }
+            console.log('asdasdasdasd');
             var path = self.currentPath.join('/');
             self.requesting = true;
             self.fileList = [];
-            return self.list().then(function(data) {
+            return self.list(params).then(function(data) {
                 self.fileList = (data.result || []).map(function(file) {
                     return new Item(file, self.currentPath);
                 });

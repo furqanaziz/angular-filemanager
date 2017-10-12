@@ -7,7 +7,9 @@
           restrict: 'EA',
           scope: {
             imageonly: '=',
-            config: '=?'
+            config: '=?',
+            path: '=?',
+            isoriginal: '=?',
           },
           link: function (scope) {
                             scope.config = scope.config || {};

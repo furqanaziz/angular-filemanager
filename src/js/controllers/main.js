@@ -6,13 +6,13 @@
 
         var $storage = $window.localStorage;
         //$scope.config = fileManagerConfig;
-        console.log($scope.$parent.$parent);
+        //console.log($scope.$parent.$parent);
         $scope.isOriginal = $scope.$parent.$parent.isOriginal;
         $scope.listpath = $scope.$parent.$parent.listpath;
         $scope.imageonly = $scope.$parent.$parent.imageonly;
         $scope.config = angular.merge(fileManagerConfig, $scope.$parent.$parent.config);
-        console.log($scope.$parent.$parent.config);
-        console.log($scope.config);
+        //console.log($scope.$parent.$parent.config);
+        //console.log($scope.config);
         $scope.reverse = false;
         $scope.predicate = ['model.type', 'model.name'];
         $scope.order = function(predicate) {

@@ -10,9 +10,7 @@
               scope.isOriginal = attrs.isoriginal;
               scope.imageonly = attrs.imageonly;
               scope.listpath = attrs.path;
-              scope.config = scope.config || {},
-              console.log(attrs.config);
-              console.log(JSON.parse(attrs.config));
+              scope.config = scope.config || {};
               if(attrs && attrs.config)
                 scope.config = JSON.parse(attrs.config) || {};
               console.log(scope.config);

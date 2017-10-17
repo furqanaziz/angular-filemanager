@@ -78,13 +78,13 @@
             return this.apiHandler.rename(this.config.renameUrl, itemPath, newPath);
         };
 
-        ApiMiddleware.prototype.getUrl = function(item) {
+        ApiMiddleware.prototype.getUrl = function(item, isOriginal) {
             var itemPath = this.getFilePath(item);
             //return this.apiHandler.getUrl(fileManagerConfig.downloadFileUrl, itemPath);
-            return this.apiHandler.getUrl(this.config.downloadFileUrl, itemPath);
+            return this.apiHandler.getUrl(this.config.downloadFileUrl, itemPath, isOriginal);
         };
 
-        ApiMiddleware.prototype.download = function(item, forceNewWindow) {
+        ApiMiddleware.prototype.download = function(item, isOriginal, forceNewWindow) {
             //TODO: add spinner to indicate file is downloading
             var itemPath = this.getFilePath(item);
             var toFilename = item.model.name;
@@ -98,7 +98,8 @@
                 itemPath,
                 toFilename,
                 this.config.downloadFilesByAjax,
-                forceNewWindow
+                forceNewWindow,
+                isOriginal
             );
         };
 

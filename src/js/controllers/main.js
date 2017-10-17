@@ -151,7 +151,7 @@
               if ($scope.config.previewImagesInModal) {
                     return $scope.openImagePreview(item);
                 }
-                return $scope.apiMiddleware.download(item, true);
+                return $scope.apiMiddleware.download(item, $scope.isOriginal, true);
             }
 
             if (item.isEditable()) {
@@ -164,7 +164,7 @@
             $scope.apiMiddleware.apiHandler.inprocess = true;
             $scope.modal('imagepreview', null, true)
                 .find('#imagepreview-target')
-                .attr('src', $scope.getUrl(item))
+                .attr('src', $scope.getUrl(item, $scope.isOriginal))
                 .unbind('load error')
                 .on('load error', function() {
                     $scope.apiMiddleware.apiHandler.inprocess = false;
@@ -217,7 +217,7 @@
                 return;
             }
             if (item) {
-                return $scope.apiMiddleware.download(item);
+                return $scope.apiMiddleware.download(item, $scope.isOriginal);
             }
             return $scope.apiMiddleware.downloadMultiple($scope.temps);
         };
@@ -357,7 +357,7 @@
         };
 
         $scope.getUrl = function(_item) {
-            return $scope.apiMiddleware.getUrl(_item);
+            return $scope.apiMiddleware.getUrl(_item, $scope.isOriginal);
         };
 
         var validateSamePath = function(item) {

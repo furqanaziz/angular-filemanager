@@ -20,10 +20,14 @@
             $scope.predicate[1] = predicate;
         };
         $scope.query = '';
+        var _params = {
+            isOriginal: $scope.isOriginal,
+            listPath: $scope.listpath,
+        };
         //$scope.fileNavigator = new FileNavigator();
         //$scope.apiMiddleware = new ApiMiddleware();
-        $scope.fileNavigator = new FileNavigator($scope.config);
-        $scope.apiMiddleware = new ApiMiddleware($scope.config);
+        $scope.fileNavigator = new FileNavigator($scope.config, _params);
+        $scope.apiMiddleware = new ApiMiddleware($scope.config, _params);
         $scope.uploadFileList = [];
         $scope.viewTemplate = $storage.getItem('viewTemplate') || 'main-icons.html';
         $scope.fileList = [];

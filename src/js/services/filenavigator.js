@@ -3,14 +3,16 @@
     angular.module('FileManagerApp').service('fileNavigator', [
         'apiMiddleware', 'fileManagerConfig', 'item', function (ApiMiddleware, fileManagerConfig, Item) {
 
-        var FileNavigator = function(config) {
+        var FileNavigator = function(config, _params) {
             this.config = (typeof config === 'undefined') ? fileManagerConfig : config;
-            this.apiMiddleware = new ApiMiddleware(this.config);
+            this.apiMiddleware = new ApiMiddleware(this.config, _params);
             this.requesting = false;
             this.fileList = [];
             this.currentPath = this.getBasePath();
             this.history = [];
             this.error = '';
+            this._params = _params;
+            console.log(this._params);
 
             this.onRefresh = function() {};
         };
@@ -124,7 +126,7 @@
             if (item && item.isFolder()) {
                 this.currentPath = item.model.fullPath().split('/').splice(1);
             }
-            this.refresh();
+            this.refresh(this._params);
         };
 
         FileNavigator.prototype.upDir = function() {

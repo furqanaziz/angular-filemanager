@@ -4,8 +4,9 @@
         function ($window, fileManagerConfig, ApiHandler) {
 
         //var ApiMiddleware = function() {
-            var ApiMiddleware = function(config) {
-                this.config = (typeof config === 'undefined') ? fileManagerConfig : config;
+        var ApiMiddleware = function(config, _params) {
+            this.config = (typeof config === 'undefined') ? fileManagerConfig : config;
+            this._params = _params;
             this.apiHandler = new ApiHandler();
         };
 

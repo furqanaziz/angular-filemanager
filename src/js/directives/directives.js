@@ -13,7 +13,6 @@
               scope.config = scope.config || {};
               if(attrs && attrs.config)
                 scope.config = JSON.parse(attrs.config) || {};
-              console.log(scope.config);
               scope.templateUrl = ('tplPath' in scope.config) ? scope.config.tplPath : fileManagerConfig.tplPath;
           },
           controllerAs: 'vm',

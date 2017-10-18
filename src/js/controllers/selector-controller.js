@@ -2,11 +2,18 @@
     'use strict';
     angular.module('FileManagerApp').controller('ModalFileManagerCtrl', 
         ['$scope', '$rootScope', 'fileNavigator', 'fileManagerConfig', function($scope, $rootScope, FileNavigator, fileManagerConfig) {
-
+        
         $scope.config = angular.merge(fileManagerConfig, $scope.$parent.$parent.config);
+        $scope.isOriginal = $scope.$parent.$parent.isOriginal;
+        $scope.listpath = $scope.$parent.$parent.listpath;
+        $scope.imageonly = $scope.$parent.$parent.imageonly;
         $scope.reverse = false;
         $scope.predicate = ['model.type', 'model.name'];
-        $scope.fileNavigator = new FileNavigator($scope.config);
+        var _params = {
+            isOriginal: $scope.isOriginal,
+            listPath: $scope.listpath,
+        };
+        $scope.fileNavigator = new FileNavigator($scope.config, _params);
         $rootScope.selectedModalPath = [];
         
         $scope.order = function(predicate) {

@@ -6,6 +6,7 @@
             var Item = function(model, path, config) {
             var rawModel = {
                 name: model && model.name || '',
+                _id: (model && model.name || '').trim().replace(' ', '').replace(/\(|\)/g, '').replace('.','_'),
                 path: path || [],
                 type: model && model.type || 'file',
                 size: model && parseInt(model.size || 0),

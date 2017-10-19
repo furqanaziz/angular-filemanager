@@ -11,6 +11,9 @@
               scope.imageonly = attrs.imageonly;
               scope.listpath = attrs.path;
               scope.config = scope.config || {};
+              if(attrs && attrs.previewobj) {
+                scope.previewObj = JSON.parse(attrs.previewobj) || {};
+              }
               if(attrs && attrs.config)
                 scope.config = JSON.parse(attrs.config) || {};
               scope.templateUrl = ('tplPath' in scope.config) ? scope.config.tplPath : fileManagerConfig.tplPath;

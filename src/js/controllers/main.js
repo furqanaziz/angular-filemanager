@@ -33,6 +33,20 @@
         $scope.fileList = [];
         $scope.temps = [];
 
+        if($scope.$parent.$parent.previewObj && $scope.$parent.$parent.previewObj.isPreview && $scope.$parent.$parent.previewObj.extn) {
+            var _imagePath = $scope.$parent.$parent.previewObj.path;
+            setTimeout(function(){
+                $scope.modal('imagepreview', null, true)
+                .find('#imagepreview-target')
+                .attr('src', _imagePath)
+                .unbind('load error')
+                .on('load error', function() {
+                    $scope.$apply();
+                });
+              }, 0);
+            
+        }
+
         $scope.$watch('temps', function() {
             if ($scope.singleSelection()) {
                 $scope.temp = $scope.singleSelection();
@@ -112,6 +126,7 @@
         };
 
         $scope.singleSelection = function() {
+            if($scope.temps.length === 1)
             return $scope.temps.length === 1 && $scope.temps[0];
         };
 

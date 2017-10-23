@@ -5,14 +5,10 @@
         function($scope, $rootScope, $window, $translate, fileManagerConfig, Item, FileNavigator, ApiMiddleware, toastr) {
 
         var $storage = $window.localStorage;
-        //$scope.config = fileManagerConfig;
-        //console.log($scope.$parent.$parent);
         $scope.isOriginal = $scope.$parent.$parent.isOriginal;
-        $scope.listpath = $scope.$parent.$parent.listpath;
+        $scope.listpath = ($scope.$parent.$parent.listpath)?$scope.$parent.$parent.listpath.slice(1):$scope.$parent.$parent.listpath;
         $scope.imageonly = $scope.$parent.$parent.imageonly;
         $scope.config = angular.merge(fileManagerConfig, $scope.$parent.$parent.config);
-        //console.log($scope.$parent.$parent.config);
-        //console.log($scope.config);
         $scope.reverse = false;
         $scope.predicate = ['model.type', 'model.name'];
         $scope.order = function(predicate) {
@@ -23,9 +19,10 @@
         var _params = {
             isOriginal: $scope.isOriginal,
             listPath: $scope.listpath,
+            path: $scope.listpath,
+            isPath:  $scope.$parent.$parent.isPath,
+            flag: true,
         };
-        //$scope.fileNavigator = new FileNavigator();
-        //$scope.apiMiddleware = new ApiMiddleware();
         $scope.fileNavigator = new FileNavigator($scope.config, _params);
         $scope.apiMiddleware = new ApiMiddleware($scope.config, _params);
         $scope.uploadFileList = [];

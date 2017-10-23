@@ -12,6 +12,8 @@
         var _params = {
             isOriginal: $scope.isOriginal,
             listPath: $scope.listpath,
+            path: $scope.listpath,
+            isPath:  $scope.$parent.$parent.isPath
         };
         $scope.fileNavigator = new FileNavigator($scope.config, _params);
         $rootScope.selectedModalPath = [];
@@ -49,7 +51,7 @@
 
         $rootScope.openNavigator = function(path) {
             $scope.fileNavigator.currentPath = path;
-            $scope.fileNavigator.refresh();
+            $scope.fileNavigator.refresh(_params);
             $scope.modal('selector');
         };
 

@@ -4,7 +4,7 @@
 
     app.filter('strLimit', ['$filter', function($filter) {
         return function(input, limit, more) {
-            if (input.length <= limit) {
+            if (input && input.length <= limit) {
                 return input;
             }
             return $filter('limitTo')(input, limit) + (more || '...');

@@ -10,6 +10,7 @@
               scope.isOriginal = attrs.isoriginal;
               scope.imageonly = attrs.imageonly;
               scope.listpath = attrs.path;
+              scope.isPath = attrs.ispath||false;
               scope.config = scope.config || {};
               if(attrs && attrs.previewobj) {
                 scope.previewObj = JSON.parse(attrs.previewobj) || {};

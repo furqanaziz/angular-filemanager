@@ -12,8 +12,6 @@
             this.history = [];
             this.error = '';
             this._params = _params;
-            console.log(this._params);
-
             this.onRefresh = function() {};
         };
 
@@ -55,6 +53,13 @@
             var self = this;
             if (! self.currentPath.length) {
                 self.currentPath = this.getBasePath();
+            }
+            if(self._params && self._params.flag && self._params.path){
+                var _path = self._params.path.split('/');
+                for(var items in _path){
+                    self.currentPath.push(_path[items])
+                }
+                self._params.flag = false;
             }
             var path = self.currentPath.join('/');
             self.requesting = true;
@@ -108,13 +113,16 @@
                     return n.name === path;
                 })[0];
             }
-
+            
             //!this.history.length && this.history.push({name: '', nodes: []});
+            /* if(this._params && this._params.listPath)
+            !this.history.length && this.history.push({ name: path.slice(1), nodes: [] });
+            else */
             !this.history.length && this.history.push({ name: this.getBasePath()[0] || '', nodes: [] });
             flatten(this.history[0], flatNodes);
             selectedNode = findNode(flatNodes, path);
             selectedNode && (selectedNode.nodes = []);
-
+            
             for (var o in this.fileList) {
                 var item = this.fileList[o];
                 item instanceof Item && item.isFolder() && recursive(this.history[0], item, path);
@@ -122,6 +130,7 @@
         };
 
         FileNavigator.prototype.folderClick = function(item) {
+            console.log('folderClick')   
             this.currentPath = [];
             if (item && item.isFolder()) {
                 this.currentPath = item.model.fullPath().split('/').splice(1);
@@ -130,6 +139,7 @@
         };
 
         FileNavigator.prototype.upDir = function() {
+            console.log('upDir')
             if (this.currentPath[0]) {
                 this.currentPath = this.currentPath.slice(0, -1);
                 this.refresh();

@@ -39,13 +39,12 @@
             var deferred = $q.defer();
             var data = {
                 action: 'list',
-                path: (params && params.path)?params.path:path,
+                path: path,
                 fileExtensions: exts && exts.length ? exts : undefined
             };
             if(params){
                 data.isOriginal = params.isOriginal;
             }
-            
 
             self.inprocess = true;
             self.error = '';

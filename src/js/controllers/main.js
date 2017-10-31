@@ -31,16 +31,19 @@
         $scope.temps = [];
 
         if($scope.$parent.$parent.previewObj && $scope.$parent.$parent.previewObj.isPreview && $scope.$parent.$parent.previewObj.extn) {
-            var _imagePath = $scope.$parent.$parent.previewObj.path;
-            setTimeout(function(){
-                $scope.modal('imagepreview', null, true)
-                .find('#imagepreview-target')
-                .attr('src', _imagePath)
-                .unbind('load error')
-                .on('load error', function() {
-                    $scope.$apply();
-                });
-              }, 0);
+
+            if(['.jpg', '.jpeg', '.gif', '.svg', '.png'].indexOf($scope.$parent.$parent.previewObj.extn.toLowerCase()) != -1){
+                var _imagePath = $scope.$parent.$parent.previewObj.path;
+                setTimeout(function(){
+                    $scope.modal('imagepreview', null, true)
+                    .find('#imagepreview-target')
+                    .attr('src', _imagePath)
+                    .unbind('load error')
+                    .on('load error', function() {
+                        $scope.$apply();
+                    });
+                }, 0);
+            }
             
         }
 
